@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Procedural Dungeon Adventure</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <header>
+            <h1>Procedural Dungeon Adventure</h1>
+        </header>
+        
+        <main>
+            <div id="game-display">
+                <div id="output-container">
+                    <div id="game-output"></div>
+                </div>
+                
+                <div id="game-stats">
+                    <div class="stats-section">
+                        <h3>Player Stats</h3>
+                        <div id="player-stats">
+                            <div class="stat-row">
+                                <span class="stat-label">Name:</span>
+                                <span id="stat-name">Adventurer</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Health:</span>
+                                <span id="stat-health">100/100</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">Level:</span>
+                                <span id="stat-level">1</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-label">XP:</span>
+                                <span id="stat-xp">0/100</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-section">
+                        <h3>Inventory</h3>
+                        <div id="inventory-list"></div>
+                        <div class="stat-row">
+                            <span class="stat-label">Weight:</span>
+                            <span id="stat-weight">0/50</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="input-area">
+                <form id="command-form">
+                    <input type="text" id="command-input" placeholder="Enter your command..." autocomplete="off">
+                    <button type="submit" id="command-submit">Enter</button>
+                </form>
+            </div>
+        </main>
+        
+        <footer>
+            <div id="quick-commands">
+                <button class="quick-cmd" data-cmd="look">Look</button>
+                <button class="quick-cmd" data-cmd="inventory">Inventory</button>
+                <button class="quick-cmd" data-cmd="help">Help</button>
+            </div>
+        </footer>
+    </div>
+    
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
