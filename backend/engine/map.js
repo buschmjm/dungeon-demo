@@ -17,33 +17,45 @@
 // Step 1: Define the dungeon grid size.
 // - Choose a grid dimension (e.g., 10x10).
 // - Create a 2D array to represent the map layout.
-// - Fill the array with null, "empty", or placeholder values.
+// - Fill every cell with null or a placeholder value like "empty".
+let mapSize = 6;
 
-// Step 2: Choose a starting room.
-// - Select a central or random location to place the initial room.
-// - Store something like { type: "room" } in that cell.
-// - Keep track of visited cells to avoid duplication during generation.
+function buildMapMatrix(mapSize) {
+  let mapMatrix = [];
+  for (let i = 0; i < mapSize; i++) {
+    mapMatrix[i] = [];
+    for (let j = 0; j < mapSize; j++) {
+        mapMatrix[i][j] = null;
+    }
+  }
+    mapMatrix[mapSize - 1][Math.floor(Math.random() * mapSize)] = "boss"; 
+    mapMatrix[0][Math.floor(Math.random() * mapSize)] = "entrance";
+    return mapMatrix;
+}
+  
+// Step 2: Place the start and end points.
+// - Place a room of type "entrance" near the top row (e.g., map[0][5]).
+// - Place a room of type "boss" near the bottom row (e.g., map[9][5]).
+// - These are your fixed anchor points for the dungeon layout.
 
-// Step 3: Expand the dungeon.
-// - Write logic to add more rooms and hallways that are connected.
-// - Each new room or hallway must attach to an existing one — never isolated.
-// - You can choose random directions or follow a basic branching pattern.
-// - Limit the number of rooms added (e.g., 8–12) to keep it manageable for now.
+// Step 3: Build the main path between entrance and boss.
+// - Start from the entrance and generate a connected path of rooms/hallways toward the boss room.
+// - Favor downward movement, but allow some left/right deviation.
+// - Ensure each step connects to the previous one (no gaps or teleporting).
+// - Stop once the boss room coordinates are reached.
+// - This guarantees the dungeon can always be completed.
 
-// Step 4: Return the map layout.
-// - Once generation is complete, return the 2D array containing the room structure.
-// - Later, this will be saved as part of the game state in `state.js`.
+// Step 4: Add misleading or optional paths.
+// - Loop through some cells in the main path and randomly branch off side paths.
+// - These paths should sometimes end in dead ends, loop back to earlier rooms, or trail into empty space.
+// - These are designed to obscure the true route and give the dungeon a sense of depth and exploration.
+// - Limit the size of side paths to avoid cluttering the map.
+
+// Step 5: Return the generated layout.
+// - Once all rooms and hallways are placed, return the 2D array.
+// - This structure will be passed into the game state in `state.js`.
 
 // Notes:
-// - Room contents, features, descriptions, and interaction logic will be handled
-//   by a separate system later in the project (using JSON templates).
-// - Movement commands like "go north" will be defined elsewhere (likely under backend/engine/commands/).
-// - This file should remain focused only on generating and representing the dungeon's physical layout.
-
-
-// Placeholder function definition — implement following the steps above.
-
-const mapGenerator = () => {
-    // Build and return a 2D array of room/hallway layout.
-};
-
+// - Room content (descriptions, enemies, traps, etc.) will be handled later by a separate system.
+// - Movement and command handling (e.g., “go north”) will be handled elsewhere in the engine.
+// - This file’s responsibility is to ensure the structural layout of the dungeon feels logical, connected, and maze-like — without relying on randomness alone.
