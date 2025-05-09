@@ -127,7 +127,8 @@ Other systems that integrate with the engine:
 ## Instruction Style Expectations
 
 - Each file begins with a brief explanation of its purpose and importance.
-- Followed by step-by-step, action-oriented instructional comments describing what to build and how it should behave.
+- Step-by-step, action-oriented instructional comments describe what to build and how it should behave.
+- Each step references the next file or function to implement, creating a cross-referenced, sequential workflow.
 - No deep theory, no cross-file/system explanations, and no full code unless explicitly requested.
 - Instructions are file-scoped only.
 

@@ -4,50 +4,39 @@
  * This file manages the central game state for the entire game session. All state changes must go through this module.
  */
 
-// Define a central gameState object with properties for player, map, npcs, log, time, and any other core data.
-// Create getter and setter-style functions to safely mutate the state (e.g., advanceTime, movePlayer, updateInventory).
-// Only export controlled interfaces for interacting with the state. Do not export the raw gameState object directly.
+import { initializeGame } from "../gameAPI";
 
-// Create the main game state structure
-// Use an object with separate sections for different aspects:
-//   - player: stats, inventory, skills, position, readyAt timestamp
-//   - world: map layout, active entities, items in rooms
-//   - session: game time, turn counter, flags for completed events
-//   - ui: currently visible information, available commands
+// ENGINE SETUP: STEP-BY-STEP INSTRUCTIONS
+// Follow these steps in order, moving between files as directed. Each step builds on the last.
 
-// Create a function that initializes a new game state
-// Set up default player stats and starting inventory
-// Initialize an empty or starter dungeon map
-// Set the game time to 0
-// Return the complete state object
+// Step 1: In engine.js, create a function to start a new game session. This should call a function in state.js to set up the initial game state and a function in map.js to generate the dungeon layout. Return the initial game state for the frontend.
 
-// Create functions to safely modify player state
-// Add/remove inventory items
-// Change stats like health or experience
-// Update position when moving
-// Set the player's "readyAt" timestamp when taking actions
+// Step 2: In state.js (this file), define a function to initialize and return a new game state object. The state should include at least a player object, a map object, and a time property. Export this function for use by engine.js.
 
-// Create functions to safely modify world state
-// Add/remove entities from rooms
-// Update entity states (like monster health)
-// Change room descriptions or properties
-// Handle environment effects (traps, hazards)
+// Step 3: In map.js, create a function to generate a simple dungeon map structure. Use a 2D array or similar structure. Export this function for use by state.js or engine.js.
 
-// Create functions to manage game time
-// Advance the global clock
-// Check which entities are ready to act
-// Trigger time-based events when appropriate
+// Step 4: In engine.js, create a function to process player commands. This function should accept a raw input string and the current game state. It should call the parser in parser.js to convert the input to a command object, then call the executor in executor.js to apply the command. Return the updated state and a response object.
 
-// Create utility functions for common state queries
-// Check if player can see a particular room
-// Check if player meets requirements for actions
-// Get all items in current location
-// Get all active threats or entities
+// Step 5: In parser.js, write a function that takes a raw input string and matches it to a command in commands.js. Tokenize the input, normalize it, and return a structured command object or an error. Export this function for use by engine.js.
 
-// Create a function that returns a safe copy of the state
-// This should hide information the player shouldn't know
-// It might create a deep copy to prevent accidental modification
-// It should only expose what the UI needs to display
+// Step 6: In commands.js, define a minimal command registry as an array or object. Each command should have at least a name, timeCost, and handlerId. Export the registry for use by parser.js.
 
-// Export the state management functions
-// Do not export the raw state object directly
+// Step 7: In executor.js, create a function that receives a command object and the current game state. Validate if the command is possible (e.g., is the player able to act?). Apply the command’s effects (for now, just update a log or move the player). Advance the game time by the command’s timeCost. Return the updated state and a response object. Export this function for use by engine.js.
+
+// Step 8: In engine.js, create a function to safely return the current game state for the UI. This should provide a filtered or read-only version of the state.
+
+// Step 9: In engine.js, export the three main functions: startGame, handleCommand, and getGameState as the public API for your engine.
+
+
+const initializeGame = () => {
+    var player = "Bob";
+    var map = "Dungeon";
+    var time = 0;
+    return {
+        player: player,
+        map: map,
+        time: time
+    };
+}
+
+export default initializeGame;
