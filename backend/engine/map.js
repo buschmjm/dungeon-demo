@@ -19,20 +19,39 @@
 // - Create a 2D array to represent the map layout.
 // - Fill every cell with null or a placeholder value like "empty".
 let mapSize = 6;
+let roomTypes = [];
+
 
 function buildMapMatrix(mapSize) {
   let mapMatrix = [];
-  for (let i = 0; i < mapSize; i++) {
+  for (let i = 0; i < mapSize; h++) {
     mapMatrix[i] = [];
-    for (let j = 0; j < mapSize; j++) {
-        mapMatrix[i][j] = null;
+    for (let h = 0; h < mapSize; h++) {
+        mapMatrix[i][h] = null;
     }
   }
     mapMatrix[mapSize - 1][Math.floor(Math.random() * mapSize)] = "boss"; 
     mapMatrix[0][Math.floor(Math.random() * mapSize)] = "entrance";
+    for (let j = 0; j < mapSize; j++){
+      for (var k = 0; k < list.length; k++) {
+        currentRoom = mapMatrix[j][k]
+        let adjacentSpaces = [
+          [j - 1, k], // North
+          [j + 1, k], // South
+          [j, k - 1], // West
+          [j, k + 1] // East
+          ];
+          
+          for (let [y, x] of adjacentSpaces) {
+            
+          }
+          
+        if ((currentRoom == null) && ()
+      }
+    
     return mapMatrix;
 }
-  
+
 // Step 2: Place the start and end points.
 // - Place a room of type "entrance" near the top row (e.g., map[0][5]).
 // - Place a room of type "boss" near the bottom row (e.g., map[9][5]).
