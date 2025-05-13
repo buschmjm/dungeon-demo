@@ -6,3 +6,8 @@
 
 // ENGINE SETUP: See the step-by-step instructions in state.js for the full build order and file sequence.
 // This file should only contain the functions and imports described in those steps.
+function processCommand(command, state, player) {
+    // Placeholder for command processing logic
+    console.log(`Processing command: ${command}`+` by player: ${player}`);
+    return state;
+}

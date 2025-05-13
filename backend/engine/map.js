@@ -24,18 +24,18 @@ const ROOM_TYPES = [
  * @returns {(string|null)[][]}  The completed map layout.
  */
 export function buildMapMatrix(mapSize) {
-  // 1. Initialize empty grid
+  // Initialize empty grid
   const mapMatrix = Array.from({ length: mapSize }, () =>
     Array(mapSize).fill(null)
   );
 
-  // 2. Place entrance and boss anchors
+  // Place entrance and boss anchors
   const entrance = { y: 0, x: Math.floor(Math.random() * mapSize) };
   const boss =    { y: mapSize - 1, x: Math.floor(Math.random() * mapSize) };
   mapMatrix[entrance.y][entrance.x] = 'entrance';
   mapMatrix[boss.y][boss.x] = 'boss';
 
-  // 3. Carve guaranteed main path via biased random walk
+  // Carve guaranteed main path via biased random walk
   const mainPath = [];
   let current = { ...entrance };
   mainPath.push({ ...current });
