@@ -24,33 +24,49 @@ let roomTypes = [];
 
 function buildMapMatrix(mapSize) {
   let mapMatrix = [];
-  for (let i = 0; i < mapSize; h++) {
+
+  // Initialize the matrix
+  for (let i = 0; i < mapSize; i++) {
     mapMatrix[i] = [];
-    for (let h = 0; h < mapSize; h++) {
-        mapMatrix[i][h] = null;
+    for (let j = 0; j < mapSize; j++) {
+      mapMatrix[i][j] = null;
     }
   }
-    mapMatrix[mapSize - 1][Math.floor(Math.random() * mapSize)] = "boss"; 
-    mapMatrix[0][Math.floor(Math.random() * mapSize)] = "entrance";
-    for (let j = 0; j < mapSize; j++){
-      for (var k = 0; k < list.length; k++) {
-        currentRoom = mapMatrix[j][k]
+
+  // Place boss and entrance
+  mapMatrix[mapSize - 1][Math.floor(Math.random() * mapSize)] = "boss";
+  mapMatrix[0][Math.floor(Math.random() * mapSize)] = "entrance";
+
+  // Filler roomTypes array
+  const roomTypes = ["miscRoom", "armory", "treasureRoom", "trapRoom", "enemyRoom", "puzzleRoom"];
+
+  for (let j = 0; j < mapSize; j++) {
+    for (let k = 0; k < mapSize; k++) {
+      let currentRoom = mapMatrix[j][k];
+
+      if (currentRoom !== null) {
         let adjacentSpaces = [
-          [j - 1, k], // North
-          [j + 1, k], // South
-          [j, k - 1], // West
-          [j, k + 1] // East
-          ];
-          
-          for (let [y, x] of adjacentSpaces) {
-            
+          [j - 1, k],
+          [j + 1, k],
+          [j, k - 1],
+          [j, k + 1]
+        ];
+
+        for (let [y, x] of adjacentSpaces) {
+          if (y >= 0 && y < mapSize && x >= 0 && x < mapSize) {
+            if (mapMatrix[y][x] == null) {
+              let roomType = roomTypes[Math.floor(Math.random() * roomTypes.length)];
+              mapMatrix[y][x] = roomType;
+            }
           }
-          
-        if ((currentRoom == null) && ()
+        }
       }
-    
-    return mapMatrix;
+    }
+  }
+
+  return mapMatrix;
 }
+
 
 // Step 2: Place the start and end points.
 // - Place a room of type "entrance" near the top row (e.g., map[0][5]).
